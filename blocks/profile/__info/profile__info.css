@@ -1,0 +1,15 @@
+.profile__info {
+  position: relative;
+  max-width: 282px;
+  margin: 0px auto;
+}
+
+@media screen and (min-width: 1280px) {
+  .profile__info{
+    margin: 22px 0px 0px 30px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 336px;
+    max-height: 73px;
+  }
+}
