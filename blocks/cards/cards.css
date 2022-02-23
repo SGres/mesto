@@ -1,0 +1,5 @@
+.cards {
+  display: grid;
+  display: block;
+  grid-template-columns: 88.125%;
+}
