@@ -21,3 +21,7 @@
 @import url(../blocks/card/__like/card__like.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__block/card__block.css);
+
+.places {
+  margin: 0px auto 0px;
+}
