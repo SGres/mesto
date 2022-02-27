@@ -1,0 +1,4 @@
+.card__block {
+  display: flex;
+  max-height: calc(361px - 282px);
+}
