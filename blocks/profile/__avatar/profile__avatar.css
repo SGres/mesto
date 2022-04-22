@@ -3,6 +3,7 @@
   width: 120px;
   margin: 42px auto 0px;
   display: block;
+  border-radius: 50%;
 }
 
 @media screen and (min-width:1280px) {
