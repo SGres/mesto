@@ -1,4 +1,4 @@
-.popup__namesave {
+.popup__name-save {
   font-family: 'Inter';
   font-weight: 400;
   font-size: 14px;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .popup__namesave {
+  .popup__name-save {
     line-height: 22px;
     font-size: 18px;
     margin: 0px 0px 0px 0px;
