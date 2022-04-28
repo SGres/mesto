@@ -2,13 +2,13 @@
   background: url(../../../image/Edit-Button.png);
   width: 18px;
   height: 18px;
-  position: absolute;
-  left: 245px;
-  top: 8px;
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
   transition: opacity 2s;
+  position: absolute;
+  left: 245px;
+  top: 34px;
 }
 
 .profile__edit-button:hover{
@@ -17,7 +17,6 @@
 
 @media screen and (min-width: 1280px) {
   .profile__edit-button {
-    position: static;
     width: 24px;
     height: 24px;
     margin: 15px 0px 0px 18px;
