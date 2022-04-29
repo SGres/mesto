@@ -9,6 +9,7 @@
   position: absolute;
   left: 245px;
   top: 34px;
+  padding: 0px;
 }
 
 .profile__edit-button:hover{
@@ -17,8 +18,9 @@
 
 @media screen and (min-width: 1280px) {
   .profile__edit-button {
+    position: static;
     width: 24px;
     height: 24px;
-    margin: 15px 0px 0px 18px;
+    margin: 0px 0px 0px 18px;
   }
 }

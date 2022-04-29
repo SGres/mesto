@@ -1,15 +1,14 @@
 .profile__info {
-  width: 282px;
   margin: auto;
   position: relative;
+  width: 282px;
 }
 
 @media screen and (min-width: 1280px) {
   .profile__info{
-    margin: 22px 0px 0px 30px;
+    margin-left: 30px;
     display: flex;
     flex-wrap: wrap;
-    max-width: 336px;
-    max-height: 73px;
+    width: 336px;
   }
 }
