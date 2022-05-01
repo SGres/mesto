@@ -9,7 +9,6 @@
   transition: background-color 1s;
   padding: 0px;
 }
-}
 
 .popup__button-save:hover {
   background-color: rgba(0, 0, 0, 0.8);
