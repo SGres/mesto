@@ -14,7 +14,7 @@
 }
 
 @media screen and (min-width: 1280px) {
-  .popup__input-job{
+  .popup__input-job {
     width: 358px;
     margin: 30px auto 0px;
   }
