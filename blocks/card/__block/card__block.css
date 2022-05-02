@@ -1,5 +1,7 @@
 .card__block {
   display: flex;
   justify-content: space-between;
-  margin: 0px 0px 0px 0px;
+  margin: 0px auto 0px;
+  width: 246px;
+  align-items: baseline;
 }
