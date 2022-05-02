@@ -6,10 +6,9 @@
   background-size: cover;
   border: none;
   transition: opacity 2s;
-  position: absolute;
-  left: 245px;
-  top: 34px;
   padding: 0px;
+  position: relative;
+  right: 18.5px;
 }
 
 .profile__edit-button:hover {

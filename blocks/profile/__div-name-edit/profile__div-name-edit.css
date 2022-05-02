@@ -1,11 +1,4 @@
 .profile__div-name-edit {
   display: flex;
-}
-
-@media screen and (min-width: 1280px) {
-  .profile__div-name-edit {
-    align-items: baseline;
-    height: 48px;
-
-  }
+  align-items: baseline;
 }
