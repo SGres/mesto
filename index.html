@@ -13,7 +13,7 @@
 
   <header class="header">
     <a href="#">
-      <img class="logo" src="./image/logo.png" alt="логотип сайта Место">
+      <img class="logo" src="./image/logo.svg" alt="логотип сайта Место">
     </a>
   </header>
 
@@ -22,59 +22,58 @@
     <div class="profile__info">
       <div class="profile__div-name-edit">
         <h1 class=" profile__name">Жак-ив Кусто</h1>
-        <button class="profile__edit-button"></button>
+        <button type="button" class="profile__edit-button"></button>
       </div>
       <p class="profile__job">Исследователь океана</p>
     </div>
-    <button class="profile__add-button"></button>
-
+    <button type="button" class="profile__add-button"></button>
   </section>
-
-  <ul class="cards">
-    <li class="card">
-      <img src="./image/karachaevsk.png" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Карачаевск</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-    <li class="card">
-      <img src="./image/elbrus.png" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Эльбрус</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-    <li class="card">
-      <img src="./image/dombay.png" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Домбай</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-    <li class="card">
-      <img src="./image/baikal.jpg" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Байкал</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-    <li class="card">
-      <img src="./image/sudak.jpg" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Судак</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-    <li class="card">
-      <img src="./image/LakeOnega.jpg" alt="фото в профиле" class="card__foto">
-      <div class="card__block">
-        <h2 class="card__title">Онежское озеро</h2>
-        <button class="card__like"></button>
-      </div>
-    </li>
-  </ul>
-
+  <main>
+    <ul class="cards">
+      <li class="card">
+        <img src="./image/karachaevsk.png" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Карачаевск</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+      <li class="card">
+        <img src="./image/elbrus.png" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Эльбрус</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+      <li class="card">
+        <img src="./image/dombay.png" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Домбай</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+      <li class="card">
+        <img src="./image/baikal.jpg" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Байкал</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+      <li class="card">
+        <img src="./image/sudak.jpg" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Судак</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+      <li class="card">
+        <img src="./image/LakeOnega.jpg" alt="фото в профиле" class="card__foto">
+        <div class="card__block">
+          <h2 class="card__title">Онежское озеро</h2>
+          <button type="button" class="card__like"></button>
+        </div>
+      </li>
+    </ul>
+  </main>
   <footer class="footer">
     <h2 class="footer__text">© 2022 Mesto Russia</h2>
   </footer>
@@ -82,18 +81,18 @@
   <section class="popup">
     <div class="popup__window">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form">
-        <input type="text" class="popup__input-name">
-        <input type="text" class="popup__input-job">
+      <form name="popup__form" class="popup__form">
+        <input name="input-name" type="text" class="popup__input popup__input_name">
+        <input name="input-job" type="text" class="popup__input popup__input_job">
         <button type="submit" class="popup__button-save">
           Сохранить
         </button>
       </form>
-      <button class="popup__button-close"></button>
+      <button type="button" class="popup__button-close"></button>
     </div>
   </section>
 
-  <script src="./index.js"></script>
+  <script src="./script/index.js"></script>
 </body>
 
 </html>
