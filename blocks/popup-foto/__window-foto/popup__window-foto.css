@@ -1,0 +1,9 @@
+.popup__window-foto {
+  margin: auto;
+  position: relative;
+}
+
+@media screen and (min-width: 1280px) {
+  .popup__window-foto {
+  }
+}

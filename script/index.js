@@ -1,4 +1,3 @@
-// Находим форму в DOM
 let formElement = document.querySelector('.popup');
 let editButton = document.querySelector('.profile__edit-button');
 let closeButton = document.querySelector('.popup__button-close');
@@ -28,4 +27,5 @@ function formSubmitHandler(evt) {
 editButton.addEventListener('click', openForm);
 closeButton.addEventListener('click', closeForm);
 submitForm.addEventListener('submit', formSubmitHandler);
+
 
