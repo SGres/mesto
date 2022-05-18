@@ -1,3 +1,9 @@
+// ! осталось сделать:
+// * открытие попапа с картинкой
+// * открытие попапа добавления карточки
+// * функция добавления карточки
+// * плавное появление поапа
+
 //данные
 
 let formElement = document.querySelector('.popup');
@@ -77,21 +83,19 @@ function likeEdit(evt) {
   evt.target.classList.toggle('card__like_active');
 }
 
+//функция удаления карты
+function delCard(evt) {
+evt.target.closest('.card').remove();
+}
 
-// вызов попапа общий
-editButton.addEventListener('click', () => {
-  openForm(editProfilePopup);
-});
-
-
+//функция выводы карт из массива
 const addCard = function ({ link, name }) {
   const tlCard = document.querySelector('.tl-card').content.querySelector('.card').cloneNode(true);
   const imgCard = tlCard.querySelector('.card__foto');
   const nameCard = tlCard.querySelector('.card__title');
   const btnLike = tlCard.querySelector('.card__like');
-  // const btnDelCard = tlCard.querySelector('.card__del');
-  // const btnLikeCard = tlCard.querySelector('.card__like');
-  // btnDelCard.addEventListener('click', );
+  const btnDelCard = tlCard.querySelector('.card__del');
+  btnDelCard.addEventListener('click', delCard);
   btnLike.addEventListener('click', likeEdit);
   // imgCard.addEventListener('click');
   nameCard.textContent = name;
@@ -117,3 +121,8 @@ closeButton.addEventListener('click', closeForm);
 
 // сохранение попапа пользователя
 submitForm.addEventListener('submit', formSubmitHandler);
+
+// вызов попапа общий
+editButton.addEventListener('click', () => {
+  openForm(editProfilePopup);
+});
