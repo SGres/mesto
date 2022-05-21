@@ -10,7 +10,7 @@ let profileJob = document.querySelector('.profile__job');
 let inputName = document.querySelector('.popup__input_type_name');
 let inputJob = document.querySelector('.popup__input_type_job');
 let submitForm = document.querySelector('.popup__form');
-let editProfilePopup = document.querySelector('.popup__edit-profile');
+let editProfilePopup = document.querySelector('.popup_specific_edit-profile');
 
 
 // данные контейнера с карточками
@@ -18,14 +18,14 @@ let containerCard = document.querySelector('.cards');
 let buttonNewCard = document.querySelector('.profile__add-button');
 
 // данные попапа добавления карточки
-let popupNewFoto = document.querySelector('.popup__new-card');
+let popupNewFoto = document.querySelector('.popup_specific_new-card');
 let buttonClosePopupNewFoto = document.querySelector('.popup__button-close-popup-new-foto');
 let popupNewFotoForm = document.querySelector('.popup__form-new-card');
 let popupNewFotoInputName = document.querySelector('.popup__input_type_name-foto');
 let popupNewFotoInputUrl = document.querySelector('.popup__input_type_url');
 
 //данные попапа карточки
-let popupOpenCard = document.querySelector('.popup__open-card');
+let popupOpenCard = document.querySelector('.popup_specific_open-card');
 let cardImg = popupOpenCard.querySelector('.popup__open-photo');
 let cardTitle = popupOpenCard.querySelector('.popup__foto-title');
 let buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto')
