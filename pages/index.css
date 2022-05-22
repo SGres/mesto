@@ -42,7 +42,7 @@
 @import url(../blocks/popup-new-card/popup-new-card.css);
 
 @import url(../blocks/popup-foto/popup-foto.css);
-@import url(../blocks/popup-foto/__img/popup-foto__img.css);
+@import url(../blocks/popup/__open-photo/popup__open-photo.css);
 @import url(../blocks/popup-foto/__button-close-foto/popup__button-close-foto.css);
 @import url(../blocks/popup-foto/__window-foto/popup__window-foto.css);
 @import url(../blocks/popup-foto/__foto-title/popup__foto-title.css);

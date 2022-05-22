@@ -1,72 +1,40 @@
-// ! осталось сделать:
-// * плавное появление поапа
-
 //данные попапа профиля
-let formElement = document.querySelector('.popup');
-let editButton = document.querySelector('.profile__edit-button');
-let closeButton = document.querySelector('.popup__button-close');
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
-let inputName = document.querySelector('.popup__input_type_name');
-let inputJob = document.querySelector('.popup__input_type_job');
-let submitForm = document.querySelector('.popup__form');
-let editProfilePopup = document.querySelector('.popup_specific_edit-profile');
-
+const editProfilePopup = document.querySelector('.popup_specific_edit-profile');
+const editButton = document.querySelector('.profile__edit-button');
+const popupProfileCloseButton = editProfilePopup.querySelector('.popup__button-close');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
+const inputName = document.querySelector('.popup__input_type_name');
+const inputJob = document.querySelector('.popup__input_type_job');
+const popupProfileSubmitForm = editProfilePopup.querySelector('.popup__form');
 
 // данные контейнера с карточками
-let containerCard = document.querySelector('.cards');
-let buttonNewCard = document.querySelector('.profile__add-button');
+const containerCard = document.querySelector('.cards');
+const buttonNewCard = document.querySelector('.profile__add-button');
 
 // данные попапа добавления карточки
-let popupNewFoto = document.querySelector('.popup_specific_new-card');
-let buttonClosePopupNewFoto = document.querySelector('.popup__button-close-popup-new-foto');
-let popupNewFotoForm = document.querySelector('.popup__form-new-card');
-let popupNewFotoInputName = document.querySelector('.popup__input_type_name-foto');
-let popupNewFotoInputUrl = document.querySelector('.popup__input_type_url');
+const popupNewFoto = document.querySelector('.popup_specific_new-card');
+const buttonClosePopupNewFoto = document.querySelector('.popup__button-close-popup-new-foto');
+const popupNewFotoForm = document.querySelector('.popup__form-new-card');
+const popupNewFotoInputName = document.querySelector('.popup__input_type_name-foto');
+const popupNewFotoInputUrl = document.querySelector('.popup__input_type_url');
 
 //данные попапа карточки
-let popupOpenCard = document.querySelector('.popup_specific_open-card');
-let cardImg = popupOpenCard.querySelector('.popup__open-photo');
-let cardTitle = popupOpenCard.querySelector('.popup__foto-title');
-let buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto')
+const popupOpenCard = document.querySelector('.popup_specific_open-card');
+const cardImg = popupOpenCard.querySelector('.popup__open-photo');
+const cardTitle = popupOpenCard.querySelector('.popup__foto-title');
+const buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto');
 
-// массив с карточками
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 //функции
 
 // функция открытия\закрытия попапа
-function openForm(selectedPopup) {
+function openPopup(selectedPopup) {
   selectedPopup.classList.add('popup_active');
   inputUserData();
 }
 
-function closeForm(selectedPopup) {
+function closePopup(selectedPopup) {
   selectedPopup.classList.remove('popup_active');
 }
 
@@ -77,18 +45,18 @@ function inputUserData() {
 }
 
 // изменение данных пользователя
-function formSubmitHandler(evt) {
+function submitProfileForm(evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-  closeForm(editProfilePopup);
+  closePopup(editProfilePopup);
 }
 
 // функция создания карточек
-function AddNewСard(evt) {
+function addNewСard(evt) {
   evt.preventDefault();
   containerCard.prepend(makeCard({ link: popupNewFotoInputUrl.value, name: popupNewFotoInputName.value }));
-  closeForm(popupNewFoto);
+  closePopup(popupNewFoto);
   evt.target.reset();
 }
 
@@ -117,7 +85,7 @@ function popupCardOpen(evt) {
   cardImg.alt = evt.target.alt;
   cardImg.src = evt.target.src;
   cardTitle.textContent = evt.target.alt;
-  openForm(popupOpenCard);
+  openPopup(popupOpenCard);
 }
 
 
@@ -128,28 +96,28 @@ initialCards.reverse().forEach((item) => { containerCard.prepend(makeCard(item))
 
 // действия с попапом пользователя
 editButton.addEventListener('click', () => {
-  openForm(editProfilePopup);
+  openPopup(editProfilePopup);
 });
 
-closeButton.addEventListener('click', () => {
-  closeForm(editProfilePopup);
+popupProfileCloseButton.addEventListener('click', () => {
+  closePopup(editProfilePopup);
 });
 
-submitForm.addEventListener('submit', formSubmitHandler);
+popupProfileSubmitForm.addEventListener('submit', submitProfileForm);
 
 //дейтсвия с попапом карточки
 buttonCardClose.addEventListener('click', () => {
-  closeForm(popupOpenCard);
+  closePopup(popupOpenCard);
 });
 
 //действия с попапом добавления картинки
 buttonNewCard.addEventListener('click', () => {
-  openForm(popupNewFoto);
+  openPopup(popupNewFoto);
 });
 
 buttonClosePopupNewFoto.addEventListener('click', () => {
-  closeForm(popupNewFoto);
+  closePopup(popupNewFoto);
 });
 
-popupNewFotoForm.addEventListener('submit', AddNewСard);
+popupNewFotoForm.addEventListener('submit', addNewСard);
 

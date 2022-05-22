@@ -35,8 +35,10 @@
 
         <template class="tl-card">
           <li class="card">
+            <div class="">
             <img src="./image/karachaevsk.png" alt="фото в профиле" class="card__foto">
             <button type="button" class="card__del"></button>
+            </div>
             <div class="card__block">
               <h2 class="card__title">Карачаевск</h2>
               <button type="button" class="card__like "></button>
@@ -56,8 +58,8 @@
     <div class="popup__window">
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="popup__form" class="popup__form">
-        <input name="input-name" type="text" class="popup__input popup__input_type_name">
-        <input name="input-job" type="text" class="popup__input popup__input_type_job">
+        <input name="input-name" type="text" placeholder="Имя" class="popup__input popup__input_type_name">
+        <input name="input-job" type="text" placeholder="Призвание" class="popup__input popup__input_type_job">
         <button type="submit" class="popup__button-save">
           Сохранить
         </button>
@@ -70,8 +72,8 @@
     <div class="popup__window">
       <h2 class="popup__title">Новое место</h2>
       <form name="popup__form-new-card" class="popup__form-new-card">
-        <input name="input-mesto" type="text" class="popup__input popup__input_type_name-foto">
-        <input name="input-url" type="text" class="popup__input popup__input_type_url">
+        <input name="input-mesto" type="text" placeholder="Название" class="popup__input popup__input_type_name-foto">
+        <input name="input-url" type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_url">
         <button type="submit" class="popup__button-save popup__button-save-new-card">
           Сохранить
         </button>
@@ -87,8 +89,9 @@
       <h2 class="popup__foto-title">Название</h2>
     </div>
   </section>
-
+  <script src="./script/initialCards.js"></script>
   <script src="./script/index.js"></script>
+
 </body>
 
 </html>

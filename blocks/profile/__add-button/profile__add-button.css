@@ -6,7 +6,7 @@
   display: block;
   background-size: contain;
   background-repeat: round;
-  transition: opacity 2s;
+  transition: opacity 1s;
   padding: 0;
   border: none;
 }
