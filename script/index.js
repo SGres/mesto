@@ -64,6 +64,7 @@ function addNewСard(evt) {
 const makeCard = function ({ link, name }) {
   const tlCard = document.querySelector('.tl-card').content.querySelector('.card').cloneNode(true);
   const imgCard = tlCard.querySelector('.card__foto');
+  const buttonOpenCard = tlCard.querySelector('.card__block-foto');
   const nameCard = tlCard.querySelector('.card__title');
   const btnLike = tlCard.querySelector('.card__like');
   const btnDelCard = tlCard.querySelector('.card__del');
@@ -73,7 +74,7 @@ const makeCard = function ({ link, name }) {
   btnLike.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like_active');
   });
-  imgCard.addEventListener('click', popupCardOpen);
+  buttonOpenCard.addEventListener('click', popupCardOpen);
   nameCard.textContent = name;
   imgCard.src = link;
   imgCard.alt = name;
