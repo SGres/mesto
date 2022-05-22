@@ -31,7 +31,6 @@ const buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto')
 // функция открытия\закрытия попапа
 function openPopup(selectedPopup) {
   selectedPopup.classList.add('popup_active');
-  inputUserData();
 }
 
 function closePopup(selectedPopup) {
@@ -98,6 +97,7 @@ initialCards.reverse().forEach((item) => { containerCard.prepend(makeCard(item))
 // действия с попапом пользователя
 editButton.addEventListener('click', () => {
   openPopup(editProfilePopup);
+  inputUserData();
 });
 
 popupProfileCloseButton.addEventListener('click', () => {
