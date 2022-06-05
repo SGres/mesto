@@ -26,6 +26,8 @@ const cardTitle = popupOpenCard.querySelector('.popup__foto-title');
 const buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto');
 
 
+
+
 //функции
 
 // функция открытия\закрытия попапа

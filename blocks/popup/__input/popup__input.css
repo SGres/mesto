@@ -11,6 +11,7 @@
   margin: 30px auto 0px;
   height: 27px;
   width: 238px;
+  padding: 0;
 }
 
 .popup__input:first-child {
