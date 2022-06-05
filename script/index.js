@@ -1,3 +1,5 @@
+//данные
+
 //данные попапа профиля
 const editProfilePopup = document.querySelector('.popup_specific_edit-profile');
 const editButton = document.querySelector('.profile__edit-button');
@@ -7,7 +9,6 @@ const profileJob = document.querySelector('.profile__job');
 const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 const popupProfileSubmitForm = editProfilePopup.querySelector('.popup__form');
-
 
 // данные контейнера с карточками
 const containerCard = document.querySelector('.cards');
@@ -26,7 +27,7 @@ const cardImg = popupOpenCard.querySelector('.popup__open-photo');
 const cardTitle = popupOpenCard.querySelector('.popup__foto-title');
 const buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto');
 
-//общие данные попапа
+//общие данные попапов
 const popapArray = Array.from(document.querySelectorAll('.popup'));
 
 
