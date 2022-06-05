@@ -8,6 +8,7 @@ const inputName = document.querySelector('.popup__input_type_name');
 const inputJob = document.querySelector('.popup__input_type_job');
 const popupProfileSubmitForm = editProfilePopup.querySelector('.popup__form');
 
+
 // данные контейнера с карточками
 const containerCard = document.querySelector('.cards');
 const buttonNewCard = document.querySelector('.profile__add-button');
@@ -24,6 +25,9 @@ const popupOpenCard = document.querySelector('.popup_specific_open-card');
 const cardImg = popupOpenCard.querySelector('.popup__open-photo');
 const cardTitle = popupOpenCard.querySelector('.popup__foto-title');
 const buttonCardClose = popupOpenCard.querySelector('.popup__button-close-foto');
+
+//общие данные попапа
+const popapArray = Array.from(document.querySelectorAll('.popup'));
 
 
 
@@ -88,7 +92,18 @@ function popupCardOpen(evt) {
   cardImg.src = evt.target.src;
   cardTitle.textContent = evt.target.alt;
   openPopup(popupOpenCard);
-}
+};
+
+
+//функция закрытия попапа на ESC
+function popupCloseEsc(event) {
+  popapArray.forEach((selectedPopup) => {
+    if (event.key === "Escape") {
+      closePopup(selectedPopup);
+    }
+  });
+};
+
 
 
 //вызовы
@@ -100,6 +115,7 @@ initialCards.reverse().forEach((item) => { containerCard.prepend(makeCard(item))
 editButton.addEventListener('click', () => {
   openPopup(editProfilePopup);
   inputUserData();
+  abc(popupProfileSubmitForm, config); //найти попап с редактировнием профиля
 });
 
 popupProfileCloseButton.addEventListener('click', () => {
@@ -111,11 +127,13 @@ popupProfileSubmitForm.addEventListener('submit', submitProfileForm);
 //дейтсвия с попапом карточки
 buttonCardClose.addEventListener('click', () => {
   closePopup(popupOpenCard);
+
 });
 
 //действия с попапом добавления картинки
 buttonNewCard.addEventListener('click', () => {
   openPopup(popupNewFoto);
+  abc(popupNewFotoForm, config);
 });
 
 buttonClosePopupNewFoto.addEventListener('click', () => {
@@ -124,3 +142,14 @@ buttonClosePopupNewFoto.addEventListener('click', () => {
 
 popupNewFotoForm.addEventListener('submit', addNewСard);
 
+//закрытие попапов на оверлей
+popapArray.forEach((selectedPopup) => {
+  selectedPopup.addEventListener('click', function (evt) {
+    if (evt.target == evt.currentTarget) {
+      closePopup(selectedPopup)
+    };
+  });
+});
+
+//закрытие попапов кнопкой esc
+document.addEventListener('keydown', popupCloseEsc);
