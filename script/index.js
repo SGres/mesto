@@ -38,10 +38,12 @@ const popapArray = Array.from(document.querySelectorAll('.popup'));
 // функция открытия\закрытия попапа
 function openPopup(selectedPopup) {
   selectedPopup.classList.add('popup_active');
+  document.addEventListener('keydown', popupCloseEsc);
 }
 
 function closePopup(selectedPopup) {
   selectedPopup.classList.remove('popup_active');
+  document.removeEventListener('keydown', popupCloseEsc);
 }
 
 // считывание данных пользователя
@@ -116,7 +118,7 @@ initialCards.reverse().forEach((item) => { containerCard.prepend(makeCard(item))
 editButton.addEventListener('click', () => {
   openPopup(editProfilePopup);
   inputUserData();
-  abc(popupProfileSubmitForm, config); //найти попап с редактировнием профиля
+  validationOpening(popupProfileSubmitForm, config);
 });
 
 popupProfileCloseButton.addEventListener('click', () => {
@@ -128,13 +130,12 @@ popupProfileSubmitForm.addEventListener('submit', submitProfileForm);
 //дейтсвия с попапом карточки
 buttonCardClose.addEventListener('click', () => {
   closePopup(popupOpenCard);
-
 });
 
 //действия с попапом добавления картинки
 buttonNewCard.addEventListener('click', () => {
   openPopup(popupNewFoto);
-  abc(popupNewFotoForm, config);
+  validationOpening(popupNewFotoForm, config);
 });
 
 buttonClosePopupNewFoto.addEventListener('click', () => {
@@ -145,12 +146,9 @@ popupNewFotoForm.addEventListener('submit', addNewСard);
 
 //закрытие попапов на оверлей
 popapArray.forEach((selectedPopup) => {
-  selectedPopup.addEventListener('click', function (evt) {
+  selectedPopup.addEventListener('mousedown', function (evt) {
     if (evt.target == evt.currentTarget) {
       closePopup(selectedPopup)
     };
   });
 });
-
-//закрытие попапов кнопкой esc
-document.addEventListener('keydown', popupCloseEsc);

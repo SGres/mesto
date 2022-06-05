@@ -9,7 +9,6 @@ const config = {
 
 const showInputError = (formElement, inputElement, errorMessage, inputErrorModif, errorSelector) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorSelector);
   inputElement.classList.add(inputErrorModif);
@@ -74,8 +73,7 @@ const enableValidation = (confVali) => {
 
 enableValidation(config);
 
-const abc = (formName, configForm) => {
-
+const validationOpening = (formName, configForm) => {
   const { inputSelector, submitButtonSelector, inputErrorClass, errorClass, inactiveButtonClass } = configForm;
   toggleButtonState(formName, submitButtonSelector, inactiveButtonClass);
   const inputList = Array.from(formName.querySelectorAll(`.${inputSelector}`));
