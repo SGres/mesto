@@ -33,18 +33,25 @@ const popapArray = Array.from(document.querySelectorAll('.popup'));
 // класс Card
 class Card {
   constructor(name, link) {
-    const tlCard = document.querySelector('.tl-card').content.querySelector('.card').cloneNode(true);
-    const imgCard = tlCard.querySelector('.card__foto');
-    const buttonOpenCard = tlCard.querySelector('.card__block-foto');
-    const nameCard = tlCard.querySelector('.card__title');
-    const btnLike = tlCard.querySelector('.card__like');
-    const btnDelCard = tlCard.querySelector('.card__del');
-    btnDelCard.addEventListener('click', function (evt) {
-      evt.target.closest('.card').remove();
-    });
-    btnLike.addEventListener('click', function (evt) {
-      evt.target.classList.toggle('card__like_active');
-    });
+    this._name = name
+    this._link = link
+  }
+
+
+
+
+  const tlCard = document.querySelector('.tl-card').content.querySelector('.card').cloneNode(true);
+  const imgCard = tlCard.querySelector('.card__foto');
+  const buttonOpenCard = tlCard.querySelector('.card__block-foto');
+  const nameCard = tlCard.querySelector('.card__title');
+  const btnLike = tlCard.querySelector('.card__like');
+  const btnDelCard = tlCard.querySelector('.card__del');
+    btnDelCard.addEventListener('click', function(evt) {
+    evt.target.closest('.card').remove();
+  });
+    btnLike.addEventListener('click', function(evt) {
+    evt.target.classList.toggle('card__like_active');
+  });
     buttonOpenCard.addEventListener('click', popupCardOpen);
     nameCard.textContent = name;
     imgCard.src = link;
