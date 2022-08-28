@@ -1,9 +1,10 @@
 import { FormValidator } from './FormValidator.js';
 import { Card } from './Card.js';
 import {
-  buttonClosePopupNewFoto, buttonNewCard, closePopup, containerCard, editButton, editProfilePopup, inputJob,
-  inputName, openPopup, popapArray, popupFormProfile, popupNewFoto, popupNewFotoForm, popupNewFotoInputName, popupNewFotoInputUrl, popupOpenFoto, popupOpenFotoBtnClose, popupProfileCloseButton,
-  popupProfileSubmitForm, profileJob, profileName
+  buttonNewCard, closePopup, containerCard, editButton, editProfilePopup, inputJob,
+  inputName, openPopup, popapArray, popupFormProfile, popupNewFoto, popupNewFotoForm,
+  popupNewFotoInputName, popupNewFotoInputUrl, popupOpenFoto, popupOpenFotoImage, popupOpenFotoText,
+  popupProfileSubmitForm, profileJob, profileName, templateCard
 } from './helpers.js';
 
 //данные
@@ -42,28 +43,78 @@ export const initialCards = [
   }
 ];
 
+//обработка щелчка по карточке
+const handleCardClick = (name, link) => {
+  popupOpenFotoImage.alt = name;
+  popupOpenFotoImage.src = link;
+  popupOpenFotoText.textContent = name;
+  openPopup(popupOpenFoto);
+};
 
-
-//создание карточек из класса
-initialCards.reverse().forEach((item) => {
-  const card = new Card(item);
+//функция создания карточки
+const createCard = (item) => {
+  const card = new Card(item, templateCard, handleCardClick);
   const cardElement = card.generateCard();
-  document.querySelector('.cards').append(cardElement);
+  return cardElement
+}
+
+// функция создания новой карточки
+const addNewСard = (evt) => {
+  evt.preventDefault();
+  const cardElment = createCard({ link: popupNewFotoInputUrl.value, name: popupNewFotoInputName.value });
+  containerCard.prepend(cardElment);
+  closePopup(popupNewFoto);
+}
+
+//создание карточек из массива
+initialCards.reverse().forEach((item) => {
+  const cardElement = createCard(item)
+  containerCard.append(cardElement);
 })
 
-// закрытие Попап на оверлей
-popapArray.forEach((selectedPopup) => {
-  selectedPopup.addEventListener('mousedown', function (evt) {
-    if (evt.target == evt.currentTarget) {
-      closePopup(selectedPopup)
-    };
-  });
+popapArray.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_active')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__button-close')) {
+      closePopup(popup)
+    }
+  })
+})
+
+
+
+
+
+
+
+
+
+//открытие попапа редактирования профиля
+const addCardForm = new FormValidator(config, popupFormProfile);
+addCardForm.enableValidation();
+editButton.addEventListener('click', () => {
+  inputUserData();
+  addCardForm.cleanUpForm();
+  openPopup(editProfilePopup);
 });
 
-// обработчик закрытия попапа с картинкой
-popupOpenFotoBtnClose.addEventListener('click', () => {
-  closePopup(popupOpenFoto);
+
+
+
+
+//открытие попава добавления карточки
+const editProfileForm = new FormValidator(config, popupNewFoto);
+editProfileForm.enableValidation();
+buttonNewCard.addEventListener('click', () => {
+  popupNewFotoForm.reset();
+  editProfileForm.cleanUpForm();
+  openPopup(popupNewFoto);
 });
+
+
+
 
 // считывание данных пользователя
 function inputUserData() {
@@ -79,49 +130,8 @@ function submitProfileForm(evt) {
   closePopup(editProfilePopup);
 }
 
-// функция создания новой карточки
-function addNewСard(evt) {
-  evt.preventDefault();
-  const card = new Card({ link: popupNewFotoInputUrl.value, name: popupNewFotoInputName.value })
-  const newCard = card.generateCard();
-  containerCard.prepend(newCard);
-  closePopup(popupNewFoto);
-}
-
-//
-//вызовы
-//
-//открытие попапа редактирования профиля
-const addCardForm = new FormValidator(config, popupFormProfile);
-editButton.addEventListener('click', () => {
-  inputUserData();
-  addCardForm.cleanUpForm();
-  addCardForm.enableValidation();
-  openPopup(editProfilePopup);
-});
-
-//закрытие попапа редактирования профиля
-popupProfileCloseButton.addEventListener('click', () => {
-  closePopup(editProfilePopup);
-});
-
 //отправка формы редактирования профиля
 popupProfileSubmitForm.addEventListener('submit', submitProfileForm);
-
-//открытие попава добавления карточки
-const editProfileForm = new FormValidator(config, popupNewFoto);
-buttonNewCard.addEventListener('click', () => {
-  popupNewFotoInputUrl.value = '';
-  popupNewFotoInputName.value = '';
-  editProfileForm.cleanUpForm();
-  editProfileForm.enableValidation();
-  openPopup(popupNewFoto);
-});
-
-//закрытие попапа добавления профиля
-buttonClosePopupNewFoto.addEventListener('click', () => {
-  closePopup(popupNewFoto);
-});
 
 //отправка попапа добавления новой карточки
 popupNewFotoForm.addEventListener('submit', addNewСard);

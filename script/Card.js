@@ -1,50 +1,44 @@
-import { openPopup, popupOpenFoto, popupOpenFotoImage, popupOpenFotoText } from "./helpers.js";
-
 export class Card {
-  constructor(data) {
-    this._name = data.name
-    this._link = data.link
+  constructor(item, template, handleCardClick) {
+    this._link = item.link;
+    this._name = item.name;
+    this._template = template
+    this._handleCardClick = handleCardClick
   }
 
   _getTemplate() {
-    const cardElement = document
-      .querySelector('.tl-card')
-      .content
-      .querySelector('.card')
-      .cloneNode(true);
+    const cardElement = this._template.content.cloneNode(true).children[0]
     return cardElement;
   }
 
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__title').textContent = this._name;
-    this._element.querySelector('.card__foto').src = this._link;
-    this._element.querySelector('.card__foto').alt = this._text;
+    this._cardImage = this._element.querySelector('.card__foto');
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._setEventListeners();
-    console.log(this._element);
     return this._element;
   }
 
-  _btnDelCard() {
+  _handleDelClick() {
     this._element.closest('.card').remove();
   }
 
-  _btnLike() {
-    this._element.querySelector('.card__like').classList.toggle('card__like_active');
+  _handleLikeClick() {
+    this._btnLike.classList.toggle('card__like_active');
   }
 
   _setEventListeners() {
+    this._btnLike = this._element.querySelector('.card__like');
     this._element.querySelector('.card__del').addEventListener('click', () => {
-      this._btnDelCard();
+      this._handleDelClick();
     });
     this._element.querySelector('.card__block-foto').addEventListener('click', () => {
-      popupOpenFotoImage.alt = this._name;
-      popupOpenFotoImage.src = this._link;
-      popupOpenFotoText.textContent = this._name;
-      openPopup(popupOpenFoto);
-    })
-    this._element.querySelector('.card__like').addEventListener('click', () => {
-      this._btnLike();
+      this._handleCardClick(this._name, this._link);
+    });
+    this._btnLike.addEventListener('click', () => {
+      this._handleLikeClick();
     })
   }
 }
