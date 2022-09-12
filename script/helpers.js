@@ -8,7 +8,7 @@ export const inputJob = document.querySelector('.popup__input_type_job');
 export const popupProfileSubmitForm = editProfilePopup.querySelector('.popup__form');
 
 // данные контейнера с карточками
-export const containerCard = document.querySelector('.cards');
+export const containerSelector = document.querySelector('.cards');
 export const buttonNewCard = document.querySelector('.profile__add-button');
 
 // данные попапа добавления карточки
@@ -22,29 +22,10 @@ export const popupNewFotoInputUrl = document.querySelector('.popup__input_type_u
 export const popapArray = Array.from(document.querySelectorAll('.popup'));
 
 export const popupOpenFoto = document.querySelector('.popup_specific_open-card');
-export const popupOpenFotoImage = document.querySelector('.popup__open-photo');
-export const popupOpenFotoText = document.querySelector('.popup__foto-title');
 
 //
 export const popupFormProfile = document.querySelector('.popup__form_profile');
 
 
 
-// открытие и закрытие Попап
-export const openPopup = (selectedPopup) => {
-  selectedPopup.classList.add('popup_active');
-  document.addEventListener('keydown', handleEsc);
-}
-
-export const closePopup = (selectedPopup) => {
-  selectedPopup.classList.remove('popup_active');
-  document.removeEventListener('keydown', handleEsc);
-}
-
-//закрытие попапа на Escape
-export function handleEsc(event) {
-  if (event.key === "Escape") {
-    popapArray.forEach(closePopup);
-  }
-};
 

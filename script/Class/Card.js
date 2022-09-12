@@ -1,13 +1,13 @@
 export class Card {
-  constructor(item, template, handleCardClick) {
-    this._link = item.link;
-    this._name = item.name;
-    this._template = template
-    this._handleCardClick = handleCardClick
+  constructor({ data, handleCardClick }, cardSelector) {
+    this._link = data.link;
+    this._name = data.name;
+    this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    const cardElement = this._template.content.cloneNode(true).children[0]
+    const cardElement = this._cardSelector.content.cloneNode(true).children[0]
     return cardElement;
   }
 
