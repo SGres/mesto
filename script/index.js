@@ -2,12 +2,13 @@ import { FormValidator } from './Class/FormValidator.js';
 import { Card } from './Class/Card.js';
 import { Section } from './Class/Section.js';
 import {
-  buttonNewCard, containerSelector, editButton, editProfilePopup, inputJob,
+  buttonNewCard, containerSelector, editButton, popupEditProfile, inputJob,
   inputName, popapArray, popupFormProfile, popupNewFoto, popupNewFotoForm,
   popupNewFotoInputName, popupNewFotoInputUrl, popupOpenFoto, popupProfileSubmitForm, profileJob, profileName, templateCard
 } from './helpers.js';
 import { PopupWithImage } from './Class/PopupWithImage.js';
-// import { PopupWithForm } from './Class/PopupWithForm.js';
+import { PopupWithForm } from './Class/PopupWithForm.js';
+import { UserInfo } from './Class/UserInfo.js';
 
 //данные
 const config = {
@@ -45,87 +46,68 @@ const initialCards = [
   }
 ];
 
+const userInfo = new UserInfo(profileName, profileJob);
+
 //обработчик клика по карточке
 const handleCardClick = (name, link) => {
   const popupWithImage = new PopupWithImage(popupOpenFoto, name, link);
   popupWithImage.openPopup();
 };
 
+// функция создания новой карточки
+const createCard = ([name, link]) => {
+  const card = new Card({ data: { name, link }, handleCardClick }, templateCard);
+  return card.generateCard();
+}
+
+// //открытие попава добавления карточки
+const editProfileForm = new FormValidator(config, popupFormProfile);
+editProfileForm.enableValidation();
+const classPopupEditProfile = new PopupWithForm({
+  popupSelector: popupEditProfile,
+  handleFormSubmit: (formData) => {
+    userInfo.setUserInfo(formData);
+  },
+});
+//обработчик клика по кнопке редактирования профиля
+editButton.addEventListener('click', () => {
+  const { name, job } = userInfo.getUserInfo();
+  classPopupEditProfile.openPopup();
+  classPopupEditProfile.setInputValues([job, name]);
+  editProfileForm.resetValidation();
+
+});
+
+const addCardForm = new FormValidator(config, popupFormProfile);
+addCardForm.enableValidation();
+const classPopupAddCard = new PopupWithForm({
+  popupSelector: popupNewFoto,
+  handleFormSubmit: (formData) => {
+    const card = createCard(formData);
+    cardList.setItem(card);
+  },
+});
+buttonNewCard.addEventListener('click', () => {
+  popupNewFotoForm.reset();
+  addCardForm.cleanUpForm();
+  classPopupAddCard.openPopup();
+});
+
+
+
 //создание карточек из начального массива
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card({data: item, handleCardClick}, templateCard);
+    const card = new Card({ data: item, handleCardClick }, templateCard);
     const cardElement = card.generateCard();
     cardList.setItem(cardElement);
-  }},
+  }
+},
   containerSelector);
 cardList.renderItems();
 
-// //обработчик клика по кнопке редактирования профиля
-// editButton.addEventListener('click', () => {
-//   const popupEditProfile = new PopupWithForm;
-//   popupEditProfile.openPopup();
-// };
 
-
-// const addCardForm = new FormValidator(config, popupFormProfile);
-// addCardForm.enableValidation();
-// editButton.addEventListener('click', () => {
-//   inputUserData();
-//   addCardForm.cleanUpForm();
-//   openPopup(editProfilePopup);
-// });
-
-
-
-
-
-
-// // функция создания новой карточки
-// const addNewСard = (evt) => {
-//   evt.preventDefault();
-//   const cardElment = createCard({ link: popupNewFotoInputUrl.value, name: popupNewFotoInputName.value });
-//   containerSelector.prepend(cardElment);
-//   closePopup(popupNewFoto);
-// }
-
-
-
-
-
-
-// //открытие попава добавления карточки
-// const editProfileForm = new FormValidator(config, popupNewFoto);
-// editProfileForm.enableValidation();
-// buttonNewCard.addEventListener('click', () => {
-//   popupNewFotoForm.reset();
-//   editProfileForm.cleanUpForm();
-//   openPopup(popupNewFoto);
-// });
-
-
-
-
-// // считывание данных пользователя
-// function inputUserData() {
-//   inputName.value = profileName.textContent;
-//   inputJob.value = profileJob.textContent;
-// }
-
-// // изменение данных пользователя
-// function submitProfileForm(evt) {
-//   evt.preventDefault();
-//   profileName.textContent = inputName.value;
-//   profileJob.textContent = inputJob.value;
-//   closePopup(editProfilePopup);
-// }
-
-// //отправка формы редактирования профиля
-// popupProfileSubmitForm.addEventListener('submit', submitProfileForm);
-
-// //отправка попапа добавления новой карточки
-// popupNewFotoForm.addEventListener('submit', addNewСard);
 
 
 

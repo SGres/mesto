@@ -1,11 +1,11 @@
 //данные попапа профиля
-export const editProfilePopup = document.querySelector('.popup_specific_edit-profile');
+export const popupEditProfile = document.querySelector('.popup_specific_edit-profile');
 export const editButton = document.querySelector('.profile__edit-button');
 export const profileName = document.querySelector('.profile__name');
 export const profileJob = document.querySelector('.profile__job');
 export const inputName = document.querySelector('.popup__input_type_name');
 export const inputJob = document.querySelector('.popup__input_type_job');
-export const popupProfileSubmitForm = editProfilePopup.querySelector('.popup__form');
+export const popupProfileSubmitForm = popupEditProfile.querySelector('.popup__form');
 
 // данные контейнера с карточками
 export const containerSelector = document.querySelector('.cards');
