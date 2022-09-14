@@ -2,9 +2,8 @@ import { FormValidator } from './Class/FormValidator.js';
 import { Card } from './Class/Card.js';
 import { Section } from './Class/Section.js';
 import {
-  buttonNewCard, containerSelector, editButton, popupEditProfile, inputJob,
-  inputName, popapArray, popupFormProfile, popupNewFoto, popupNewFotoForm,
-  popupNewFotoInputName, popupNewFotoInputUrl, popupOpenFoto, popupProfileSubmitForm, profileJob, profileName, templateCard
+  buttonNewCard, containerSelector, editButton, popupEditProfile, popupFormProfile, popupNewFoto, popupNewFotoForm,
+  popupOpenFoto, profileJob, profileName, templateCard
 } from './helpers.js';
 import { PopupWithImage } from './Class/PopupWithImage.js';
 import { PopupWithForm } from './Class/PopupWithForm.js';
@@ -60,7 +59,7 @@ const createCard = ([name, link]) => {
   return card.generateCard();
 }
 
-// //открытие попава добавления карточки
+//открытие попава добавления карточки
 const editProfileForm = new FormValidator(config, popupFormProfile);
 editProfileForm.enableValidation();
 const classPopupEditProfile = new PopupWithForm({
@@ -69,6 +68,7 @@ const classPopupEditProfile = new PopupWithForm({
     userInfo.setUserInfo(formData);
   },
 });
+
 //обработчик клика по кнопке редактирования профиля
 editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
@@ -78,7 +78,7 @@ editButton.addEventListener('click', () => {
 
 });
 
-const addCardForm = new FormValidator(config, popupFormProfile);
+const addCardForm = new FormValidator(config, popupNewFoto);
 addCardForm.enableValidation();
 const classPopupAddCard = new PopupWithForm({
   popupSelector: popupNewFoto,
