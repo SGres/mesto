@@ -14,26 +14,24 @@ export class Popup {
   }
 
   //закрытие попапа на Escape
-  _handleEscClose() {
-    document.addEventListener('keyup', (evt) => {
-      if (evt.key === 'Escape') {
-        this.closePopup();
-      }
-    });
-  }
+  _handleEscClose = (evt) => {
+    if (evt.key === 'Escape') {
+      this.closePopup();
+    }
+  };
 
   openPopup() {
     this._popupSelector.classList.add('popup_active');
     this.setEventListeners();
-    this._handleEscClose();
+    document.addEventListener('keyup', (evt) => {
+      this._handleEscClose(evt);
+    });
   }
 
   closePopup() {
     this._popupSelector.classList.remove('popup_active');
-    document.removeEventListener('keyup', (evt) => {
-      if (evt.key === 'Escape') {
-        this.closePopup();
-      }
-    })
+    document.addEventListener('keyup', (evt) => {
+      this._handleEscClose(evt);
+    });
   }
 }

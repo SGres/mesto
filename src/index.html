@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   <title>Mesto</title>
 </head>
 
@@ -13,14 +13,14 @@
 
   <header class="header">
     <a href="#">
-      <img class="logo" src='./image/logo.svg' alt="логотип сайта Место">
+      <img class="logo" src="<%=require('./image/logo.svg')%>" alt="логотип сайта Место">
     </a>
   </header>
 
   <main>
 
     <section class="profile">
-      <img src="./image/Avatar.png" alt="аватар профиля" class="profile__avatar">
+      <img src="<%=require('./image/Avatar.png')%>" alt="аватар профиля" class="profile__avatar">
       <div class="profile__info">
         <div class="profile__div-name-edit">
           <h1 class=" profile__name">Жак-ив Кусто</h1>

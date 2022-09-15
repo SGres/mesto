@@ -26,22 +26,19 @@ module.exports = {
       exclude: '/node_modules/'
     },
     {
-      test: /\.(png|svg|jpg|jpeg|gif)$/,
+      test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
       type: 'asset/resource',
-      generator: {
-        filename: 'images/[name].[hash][ext]',
-      }
-    },
-    {
-      test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      type: 'asset/resource',
-      generator: {
-        filename: 'fonts/[name].[hash][ext]',
-      }
     },
     {
       test: /\.css$/,
-      use: ["style-loader", "css-loader"],
+      use: [MiniCssExtractPlugin.loader, {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1
+        }
+      },
+        'postcss-loader'
+      ]
     },
     ]
   },
