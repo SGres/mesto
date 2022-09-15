@@ -1,13 +1,14 @@
-import { FormValidator } from './Class/FormValidator.js';
-import { Card } from './Class/Card.js';
-import { Section } from './Class/Section.js';
+import './index.css';
+import { FormValidator } from '../components/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { Section } from '../components/Section.js';
 import {
   buttonNewCard, containerSelector, editButton, popupEditProfile, popupFormProfile, popupNewFoto, popupNewFotoForm,
   popupOpenFoto, profileJob, profileName, templateCard
-} from './helpers.js';
-import { PopupWithImage } from './Class/PopupWithImage.js';
-import { PopupWithForm } from './Class/PopupWithForm.js';
-import { UserInfo } from './Class/UserInfo.js';
+} from '../components/helpers.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
 
 //данные
 const config = {
