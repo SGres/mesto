@@ -22,7 +22,8 @@ export class Card {
   }
 
   _handleDelClick() {
-    this._element.closest('.card').remove();
+    this._element.remove();
+    this._element = null;
   }
 
   _handleLikeClick() {

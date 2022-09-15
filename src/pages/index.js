@@ -1,62 +1,28 @@
-import './index.css';
+// import './index.css';
 import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { Section } from '../components/Section.js';
 import {
   buttonNewCard, containerSelector, editButton, popupEditProfile, popupFormProfile, popupNewFoto, popupNewFotoForm,
   popupOpenFoto, profileJob, profileName, templateCard
-} from '../components/helpers.js';
+} from '../utils/helpers.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
-
-//данные
-const config = {
-  inputSelector: 'popup__input',
-  submitButtonSelector: 'popup__button-save',
-  inactiveButtonClass: 'popup__button-save_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-}
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import { config } from '../utils/helpers.js';
+import { initialCards } from '../utils/helpers.js';
 
 const userInfo = new UserInfo(profileName, profileJob);
+const popupWithImage = new PopupWithImage(popupOpenFoto);
 
 //обработчик клика по карточке
 const handleCardClick = (name, link) => {
-  const popupWithImage = new PopupWithImage(popupOpenFoto, name, link);
-  popupWithImage.openPopup();
+  popupWithImage.openPopup(name, link);
 };
 
 // функция создания новой карточки
-const createCard = ([name, link]) => {
-  const card = new Card({ data: { name, link }, handleCardClick }, templateCard);
+const createCard = (formData) => {
+  const card = new Card({ data: formData, handleCardClick }, templateCard);
   return card.generateCard();
 }
 
@@ -79,6 +45,7 @@ editButton.addEventListener('click', () => {
 
 });
 
+//обработчик нажатия на кнопку добавления карточки
 const addCardForm = new FormValidator(config, popupNewFoto);
 addCardForm.enableValidation();
 const classPopupAddCard = new PopupWithForm({
@@ -107,26 +74,3 @@ const cardList = new Section({
 },
   containerSelector);
 cardList.renderItems();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
