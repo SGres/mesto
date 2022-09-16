@@ -27,9 +27,9 @@ const createCard = (formData) => {
 }
 
 //открытие попава добавления карточки
-const editProfileForm = new FormValidator(config, popupFormProfile);
-editProfileForm.enableValidation();
-const classPopupEditProfile = new PopupWithForm({
+const formEditProfile = new FormValidator(config, popupFormProfile);
+formEditProfile.enableValidation();
+const popupEditProfileOpened = new PopupWithForm({
   popupSelector: popupEditProfile,
   handleFormSubmit: (formData) => {
     userInfo.setUserInfo(formData);
@@ -39,9 +39,9 @@ const classPopupEditProfile = new PopupWithForm({
 //обработчик клика по кнопке редактирования профиля
 editButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
-  classPopupEditProfile.openPopup();
-  classPopupEditProfile.setInputValues([job, name]);
-  editProfileForm.resetValidation();
+  popupEditProfileOpened.openPopup();
+  popupEditProfileOpened.setInputValues({ name, job });
+  formEditProfile.resetValidation();
 
 });
 
@@ -67,10 +67,10 @@ buttonNewCard.addEventListener('click', () => {
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card({ data: item, handleCardClick }, templateCard);
-    const cardElement = card.generateCard();
-    cardList.setItem(cardElement);
+    const card = createCard(item);
+    cardList.setItem(card);
   }
 },
   containerSelector);
 cardList.renderItems();
+
