@@ -23,13 +23,11 @@ export class Popup {
   openPopup() {
     this._popupSelector.classList.add('popup_active');
     this.setEventListeners();
-    document.addEventListener('keyup', (evt) =>
-      this._handleEscClose(evt));
+    document.addEventListener('keyup', this._handleEscClose);
   }
 
   closePopup() {
     this._popupSelector.classList.remove('popup_active');
-    document.removeEventListener('keyup', (evt) =>
-      this._handleEscClose(evt));
+    document.removeEventListener('keyup', this._handleEscClose);
   }
 }
