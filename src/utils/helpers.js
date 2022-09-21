@@ -1,8 +1,6 @@
 //данные попапа профиля
 export const popupEditProfile = document.querySelector('.popup_specific_edit-profile');
 export const editButton = document.querySelector('.profile__edit-button');
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
 export const inputName = document.querySelector('.popup__input_type_name');
 export const inputJob = document.querySelector('.popup__input_type_job');
 export const popupProfileSubmitForm = popupEditProfile.querySelector('.popup__form');
@@ -25,6 +23,18 @@ export const popupOpenFoto = document.querySelector('.popup_specific_open-card')
 
 //
 export const popupFormProfile = document.querySelector('.popup__form_profile');
+
+//Попап удаления карточки
+export const popupDeletions = document.querySelector('.popup_speficic_deletions');
+
+//
+export const profileName = document.querySelector('.profile__name');
+export const profileJob = document.querySelector('.profile__job');
+export const avatarElement = document.querySelector('.profile__avatar');
+export const popupDeletionCard = document.querySelector('.popup_speficic_deletions');
+export const popupUpdateAvatar = document.querySelector('.popup_specific_edit-avatar');
+
+
 
 //данные
 export const config = {
