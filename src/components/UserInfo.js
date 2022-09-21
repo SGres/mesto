@@ -14,14 +14,14 @@ export class UserInfo {
     }
   }
 
-  setUserInfo({ inputJob, inputName, avatar, _id }) {
-    this._inputJob = inputJob;
-    this._inputName = inputName;
+  setUserInfo({ name, about, avatar, _id }) {
+    this._name = name;
+    this._about = about;
     this._avatar = avatar;
     this._id = _id;
-    this._profileJob.textContent = inputJob;
-    this._profileName.textContent = inputName;
-    this._avatarElement.style.backgraundImage = `url(${avatar})`;
+    this._profileJob.textContent = about;
+    this._profileName.textContent = name;
+    this._avatarElement.style.background = `url(${avatar})`;
   }
 
   getUserAvatar() {
@@ -32,8 +32,7 @@ export class UserInfo {
 
 
   getUserId() {
-    return {
-      _id: this._id,
-    }
+    return this._id;
+
   }
 }

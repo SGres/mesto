@@ -1,17 +1,16 @@
 export class Section {
   //отрисовка элементов
-  constructor({ items, renderer }, containerSelector) {
+  constructor({ renderer }, containerSelector) {
     this._containerSelector = containerSelector;
-    this._items = items;
     this._renderer = renderer;
   }
 
   //отрисовка всех элементов
-  renderItems() {
-    this._items.forEach(item => this._renderer(item));
+  renderItems(items) {
+    items.reverse().forEach(item => this.setItem(item));
   }
   //принимаем dom-элемент и добавляем в контейнер
-  setItem(element) {
-    this._containerSelector.prepend(element);
+  setItem(card) {
+    this._containerSelector.prepend(this._renderer(card));
   }
 }

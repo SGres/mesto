@@ -35,7 +35,6 @@ export const popupDeletionCard = document.querySelector('.popup_speficic_deletio
 export const popupUpdateAvatar = document.querySelector('.popup_specific_edit-avatar');
 
 
-
 //данные
 export const config = {
   inputSelector: 'popup__input',

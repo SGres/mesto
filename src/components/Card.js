@@ -1,16 +1,19 @@
 export class Card {
-  constructor(
-    { data, handleCardClick, handleCardDelete, handleCardLike }, cardSelector, userID) {
-    this._link = data.link;
-    this._name = data.name;
-    this._likes = data.likes;
-    this.id = item._id;
+  constructor({
+    name, link, likes, _id, owner: { _id: ownerId }
+  }, userId, cardSelector,
+    { cardHandleClick, cardDeleteHendler, cardLikeHendler }) {
+    this._link = link;
+    this._name = name;
+    this._likes = likes;
+    this.id = _id;
+    this._userId = userId;
+    this._isOwner = userId === ownerId;
     this._cardSelector = cardSelector;
-    this._handleCardClick = handleCardClick;
-    this._handleCardDelete = handleCardDelete;
-    this._handleCardLike = handleCardLike;
-    this._data = data;
-    this._userID = userID;
+    this._cardHandleClick = cardHandleClick;
+    this._cardDeleteHendler = cardDeleteHendler;
+    this._cardLikeHendler = cardLikeHendler;
+
   }
 
   _getTemplate() {
@@ -18,87 +21,65 @@ export class Card {
     return cardElement;
   }
 
-  //Проверка колличества лайков
-  handleAddLikesNumber(likes) {
-    this._cardLikes.textContent = likes;
-    if (this._cardLikes.textContent > 0) {
-      this._cardLikes.classList.add('card__like_active');
-    } else {
-      this._cardLikes.classList.remove('card__like_active');
-    }
-  }
-
-  //Проверка наличия моих лайков
-  _handleAddLikesActive() {
-    if (this._likesCallback()) {
-      this._cardLike.classList.add('card__like_active');
-    } else {
-      this._cardLike.classList.remove('card__like_active');
-    }
-  }
-
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector('.card__title').textContent = this._name;
     this._cardImage = this._element.querySelector('.card__foto');
     this._btnLike = this._element.querySelector('.card__like');
-    this._cardbtnDel = this._element.querySelector('.card__del');
-    this._cardbtnImage = this._element.querySelector('.card__block-foto');
+    this._btnDelete = this._element.querySelector('.card__del');
+    this._btnImage = this._element.querySelector('.card__block-foto');
+    this._likesCounter = this._element.querySelector('.card__like-counter');
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._setEventListeners();
-
-    this._cardLikes.textContent = this._likes.length;
-    this._handleHideDeleteButton();
-    this.handleAddLikesNumber(this._likes.length);
-    this._handleAddLikesActive();
-
+    this._renderLikes();
     return this._element;
   }
 
-  _handleDelClick() {
-    this._element.remove();
-    this._element = null;
+
+
+  setLikes(newLikes) {
+    this._likes = newLikes;
+    this._renderLikes();
   }
 
-  //Вроде проверка количества лайков
-  toggleLike() {
-    if (this._cardLike.classList.contains('card__like_active')) {
-      this._handleCardLike(this._id, false, this._element);
+  // Проверка наличия моего лайка
+  _isLiked() {
+    return this._likes.map((item) => item._id).includes(this._userId)
+  }
 
+  // Отображение состояния и количества лайков
+  _renderLikes() {
+    if (this._isLiked()) {
+      this._btnLike.classList.add('card__like_active');
     } else {
-      this._handleCardLike(this._id, true, this._element);
-
+      this._btnLike.classList.remove('card__like_active');
     }
-    this._cardLike.classList.toggle('card__like_active');
-
+    this._likesCounter.textContent = this._likes.length;
   }
 
-  //вывод иконки удаления карточки
-  _handleHideDeleteButton() {
-    if (this._item.owner._id == this._userID) {
-      //тут поидее нужно передать элемент "корзинки"
-      this._cardDelete.style.display = "block";
-    } else {
-      this._cardDelete.style.display = "none";
-    }
+  // Удаление карточки
+  removeCard() {
+    this._element.remove('card');
   }
 
-  //условие наличия среди лайков моих
-  _likesCallback() {
-    return this._item.likes.some(like => like._id == this._userID)
+  //
+  _handleDeleteClick() {
+    this._deleteCardHendler(this._id, this.removeCard);
   }
 
-  //слушатели с новыми аргументами
+  _cardHandleClick() {
+    this._cardHandleClick(this._name, this._link);
+  }
+
+  // Установка слушателей
   _setEventListeners() {
-    this._cardbtnDel.addEventListener('click', () => {
-      this._handleDelClick(this._id, this);
-    });
-    this._cardbtnImage.addEventListener('click', () => {
-      this._handleCardClick(this._name, this._link);
-    });
-    this._btnLike.addEventListener('click', () => {
-      this.toggleLike();
-    })
+    if (this._isOwner) {
+      this._btnDelete.addEventListener('click', this._handleDeleteClick)
+    } else {
+      this._btnDelete.remove();
+    }
+
+    this._btnImage.addEventListener('click', this._cardHandleClick);
   }
 }
