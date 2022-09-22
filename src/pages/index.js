@@ -13,15 +13,11 @@ import { Api } from '../components/Api.js';
 //Импорт констант
 import {
   buttonNewCard, containerSelector, editButton, popupDeletions, popupEditProfile, popupFormProfile, popupNewFoto, popupNewFotoForm,
-  popupOpenFoto, profileJob, profileName, templateCard, avatarElement, popupDeletionCard, popupUpdateAvatar
+  popupOpenFoto, profileJob, profileName, templateCard, avatarElement, popupDeletionCard, popupUpdateAvatar, cardsContainer,
 } from '../utils/helpers.js';
 import { config } from '../utils/helpers.js';
 import { initialCards } from '../utils/helpers.js';
 
-
-
-
-// Создания экземпляров
 const userInfo = new UserInfo({
   profileName: profileName,
   profileJob: profileJob,
@@ -37,6 +33,50 @@ const addCardForm = new FormValidator(config, popupNewFoto);
 addCardForm.enableValidation();
 
 const deletionCardForm = new PopupWithDeletion(popupDeletionCard);
+
+
+
+
+// Работа с попапом карточки
+const popupWithImage = new PopupWithImage(popupOpenFoto);
+const handlerCardClick = (name, link) => {
+  popupWithImage.openPopup(name, link);
+};
+
+
+// Работа с карточками
+const deleteCardHendler = (card) => {
+  api.deleteCard(card.getId())
+    .then(() => {
+      card.removeCard();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+const handleCardLike = (cardId, isLiked, setLikesCallback) => {
+  api.toggleLike(cardId, isLiked)
+    .then(({ likes }) => setLikesCallback(likes))
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+const createCard = (item) => {
+  const card = new Card(item, userInfo.getUserId(), templateCard,
+    {
+      openViewHandler: handlerCardClick,
+      deleteCardHendler,
+      cardLikeHendler: handleCardLike
+    });
+  const cardElement = card.generateCard();
+  return cardElement;
+};
+
+const cardList = new Section({ renderer: createCard }, cardsContainer);
+
+
 
 // Работа с аватаром
 const updateAvatarHandler = (data) => {
@@ -58,64 +98,7 @@ avatarElement.addEventListener('click', () => {
   avatarUpdatePopup.openPopup();
 });
 
-
-// Работа с попапом карточки
-const popupWithImage = new PopupWithImage(popupOpenFoto);
-const handlerCardClick(name, link) {
-  popupWithImage.openPopup(name, link);
-};
-
-
-// Работа с карточками
-const cardList = new Section({
-  renderer: (item) => {
-    cardList.setItem(cre)
-  }
-})
-
-const cardDeleteHendler(card) {
-  api.deleteCard(card.getId())
-    .then(() => {
-      card.removeCard();
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-}
-
-const handleCardLike = (cardId, isLiked, setLikesCallback) => {
-  api.toggleLike(cardId, isLiked)
-    .then(({ likes }) => setLikesCallback(likes));
-  .catch ((err) => {
-  console.log(err);
-})
-}
-
-
-
-
-
-
-const createCard = (item) => {
-  const card = new Card(item, userInfo.getUserId(), templateCard,
-    { cardHandleClick: handlerCardClick, cardDeleteHendler, });
-  const cardElement = card.generateCard();
-  return cardElement;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//
 Promise.all([api.getUser(), api.getCards()])
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
@@ -123,4 +106,4 @@ Promise.all([api.getUser(), api.getCards()])
   })
   .catch((err) => {
     console.log(`Ошибка Promise.all: ${err}`);
-  })
+  });

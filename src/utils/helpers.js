@@ -6,7 +6,6 @@ export const inputJob = document.querySelector('.popup__input_type_job');
 export const popupProfileSubmitForm = popupEditProfile.querySelector('.popup__form');
 
 // данные контейнера с карточками
-export const containerSelector = document.querySelector('.cards');
 export const buttonNewCard = document.querySelector('.profile__add-button');
 
 // данные попапа добавления карточки
@@ -33,7 +32,7 @@ export const profileJob = document.querySelector('.profile__job');
 export const avatarElement = document.querySelector('.profile__avatar');
 export const popupDeletionCard = document.querySelector('.popup_speficic_deletions');
 export const popupUpdateAvatar = document.querySelector('.popup_specific_edit-avatar');
-
+export const cardsContainer = document.querySelector('.cards');
 
 //данные
 export const config = {

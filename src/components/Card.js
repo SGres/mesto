@@ -1,20 +1,21 @@
 export class Card {
   constructor({
-    name, link, likes, _id, owner: { _id: ownerId }
+    name, link, likes, owner: { _id: ownerId }, _id
   }, userId, cardSelector,
-    { cardHandleClick, cardDeleteHendler, cardLikeHendler }) {
+    { openViewHandler, deleteCardHendler, cardLikeHendler }) {
     this._link = link;
     this._name = name;
     this._likes = likes;
-    this.id = _id;
+    this._id = _id;
     this._userId = userId;
     this._isOwner = userId === ownerId;
     this._cardSelector = cardSelector;
-    this._cardHandleClick = cardHandleClick;
-    this._cardDeleteHendler = cardDeleteHendler;
-    this._cardLikeHendler = cardLikeHendler;
-
+    this._handleOpenView = openViewHandler;
+    this._handleDeleteCard = deleteCardHendler;
+    this._hendlerCardLike = cardLikeHendler;
   }
+
+
 
   _getTemplate() {
     const cardElement = this._cardSelector.content.cloneNode(true).children[0]
@@ -34,6 +35,7 @@ export class Card {
     this._setEventListeners();
     this._renderLikes();
     return this._element;
+
   }
 
 
@@ -58,6 +60,9 @@ export class Card {
     this._likesCounter.textContent = this._likes.length;
   }
 
+  _handleLikeClick() {
+    this._btnLike.classList.toggle('card__like_active');
+  }
   // Удаление карточки
   removeCard() {
     this._element.remove('card');
@@ -65,7 +70,7 @@ export class Card {
 
   //
   _handleDeleteClick() {
-    this._deleteCardHendler(this._id, this.removeCard);
+    this._cardDeleteHendler(this._id, this.removeCard);
   }
 
   _cardHandleClick() {
@@ -74,6 +79,7 @@ export class Card {
 
   // Установка слушателей
   _setEventListeners() {
+    this._btnLike.addEventListener('click', this._handleLikeClick);
     if (this._isOwner) {
       this._btnDelete.addEventListener('click', this._handleDeleteClick)
     } else {
