@@ -56,6 +56,8 @@ const deleteCardHendler = (card) => {
 }
 
 const handleCardLike = (cardId, isLiked, setLikesCallback) => {
+  console.log('handleCardLike');
+  console.dir(isLiked);
   api.toggleLike(cardId, isLiked)
     .then(({ likes }) => setLikesCallback(likes))
     .catch((err) => {
@@ -64,11 +66,12 @@ const handleCardLike = (cardId, isLiked, setLikesCallback) => {
 }
 
 const createCard = (item) => {
+  console.dir(userInfo.getUserId());
   const card = new Card(item, userInfo.getUserId(), templateCard,
     {
       openViewHandler: handlerCardClick,
       deleteCardHendler,
-      cardLikeHendler: handleCardLike
+      cardLikeHendler: handleCardLike,
     });
   const cardElement = card.generateCard();
   return cardElement;
@@ -97,6 +100,22 @@ avatarElement.addEventListener('click', () => {
   avatarEditForm.resetValidation();
   avatarUpdatePopup.openPopup();
 });
+
+
+//Работа с добавлением попапа карточки
+const addCardHandler = (item) => {
+  api.addCardHandler(item.newPlace, itemlinkPlace)
+  .then((res)=>{
+    cardList.setItem(createCard(res));
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+const popupAddCard = new PopupWithForm(popupNewFoto, addCardHandler);
+popupAddCard.setEventListeners();
+
+
+}
 
 //
 Promise.all([api.getUser(), api.getCards()])

@@ -13,6 +13,12 @@ export class Card {
     this._handleOpenView = openViewHandler;
     this._handleDeleteCard = deleteCardHendler;
     this._hendlerCardLike = cardLikeHendler;
+    this.generateCard = this.generateCard.bind(this);
+    this._handleLikeClick = this._handleLikeClick.bind(this);
+    this.setLikes = this.setLikes.bind(this);
+    this.removeCard = this.removeCard.bind(this);
+    console.log('Card > constructor');
+    console.log(this._isOwner);
   }
 
 
@@ -61,7 +67,7 @@ export class Card {
   }
 
   _handleLikeClick() {
-    this._btnLike.classList.toggle('card__like_active');
+    this._hendlerCardLike(this._id, this._isLiked(), this.setLikes);
   }
   // Удаление карточки
   removeCard() {
