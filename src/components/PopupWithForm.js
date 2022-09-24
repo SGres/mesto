@@ -1,11 +1,20 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
+  constructor(popupSelector, handleFormSubmit, { normalCaption, activeCaption }) {
     super(popupSelector);
+    this._normalCaption = normalCaption;
+    this._activeCaption = activeCaption;
     this._handleFormSubmit = handleFormSubmit;
+    this._submitButton = this._popupSelector.querySelector('.popup__button-form');
     this._popupForm = this._popupSelector.querySelector('.popup__form');
     this._inputList = this._popupSelector.querySelectorAll('.popup__input');
+    this.toggleButtonCaption = this.toggleButtonCaption.bind(this);
+    this.closePopup = this.closePopup.bind(this);
+  }
+
+  toggleButtonCaption(isSave) {
+    this._submitButton.textContent = isSave ? this._activeCaption : this._normalCaption;
   }
 
   _getInputValues() {
@@ -19,8 +28,7 @@ export class PopupWithForm extends Popup {
 
   handleSubmitClick = (evt) => {
     evt.preventDefault();
-    this._handleFormSubmit(this._getInputValues());
-    this.closePopup();
+    this._handleFormSubmit(this._getInputValues(), this.toggleButtonCaption, this.closePopup);
   }
 
   setEventListeners() {
@@ -33,10 +41,4 @@ export class PopupWithForm extends Popup {
     super.closePopup();
     this._popupForm.removeEventListener('submit', this.handleSubmitClick);
   }
-
-  setInputValues(data) {
-    this._inputList[1].value = data.name;
-    this._inputList[0].value = data.job;
-  }
-
 }

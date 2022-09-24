@@ -32,11 +32,11 @@ export class Api {
   editUserInfo(firstname, work) {
     const body = {
       name: firstname,
-      about: work
+      about: work,
     };
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(body)
     })
       .then(this._checkResponse)

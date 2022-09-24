@@ -1,7 +1,7 @@
 export class UserInfo {
-  constructor({ profileName, profileJob, avatarElement }) {
+  constructor({ profileName, profileAbout, avatarElement }) {
     this._profileName = profileName;
-    this._profileJob = profileJob;
+    this._profileAbout = profileAbout;
     this._avatarElement = avatarElement;
     this.getUserInfo = this.getUserInfo.bind(this);
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -9,8 +9,8 @@ export class UserInfo {
 
   getUserInfo() {
     return {
-      name: this._profileJob.textContent,
-      job: this._profileName.textContent,
+      name: this._profileName.textContent,
+      about :this._profileAbout.textContent,
     }
   }
 
@@ -19,20 +19,12 @@ export class UserInfo {
     this._about = about;
     this._avatar = avatar;
     this._id = _id;
-    this._profileJob.textContent = about;
+    this._profileAbout.textContent = about;
     this._profileName.textContent = name;
     this._avatarElement.style.background = `url(${avatar})`;
   }
 
-  getUserAvatar() {
-    return {
-      avatar: this._avatar,
-    }
-  }
-
-
   getUserId() {
     return this._id;
-
   }
 }

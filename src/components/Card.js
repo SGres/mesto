@@ -17,8 +17,8 @@ export class Card {
     this._handleLikeClick = this._handleLikeClick.bind(this);
     this.setLikes = this.setLikes.bind(this);
     this.removeCard = this.removeCard.bind(this);
-    console.log('Card > constructor');
-    console.log(this._isOwner);
+    this._handleDeleteClick = this._handleDeleteClick.bind(this);
+    this._cardHandleClick = this._cardHandleClick.bind(this);
   }
 
 
@@ -76,11 +76,12 @@ export class Card {
 
   //
   _handleDeleteClick() {
-    this._cardDeleteHendler(this._id, this.removeCard);
+    this._handleDeleteCard(this._id, this.removeCard);
+
   }
 
   _cardHandleClick() {
-    this._cardHandleClick(this._name, this._link);
+    this._handleOpenView(this._name, this._link);
   }
 
   // Установка слушателей
