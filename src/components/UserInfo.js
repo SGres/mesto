@@ -10,7 +10,7 @@ export class UserInfo {
   getUserInfo() {
     return {
       name: this._profileName.textContent,
-      about :this._profileAbout.textContent,
+      about: this._profileAbout.textContent,
     }
   }
 
@@ -21,7 +21,7 @@ export class UserInfo {
     this._id = _id;
     this._profileAbout.textContent = about;
     this._profileName.textContent = name;
-    this._avatarElement.style.background = `url(${avatar})`;
+    this._avatarElement.style = `background-image: url(${avatar})`;
   }
 
   getUserId() {

@@ -53,11 +53,11 @@ profileEditForm.enableValidation();
 const popupEditProfileopen = new PopupWithForm(popupEditProfile, editUserInfoHandler, buttonCaptions);
 
 profileEditButton.addEventListener('click', () => {
-  profileEditForm.resetValidation();
   const currentProfileData = userInfo.getUserInfo();
   inputNameProfile.value = currentProfileData.name;
   inputAboutProfile.value = currentProfileData.about;
   popupEditProfileopen.openPopup();
+  profileEditForm.resetValidation();
 });
 
 

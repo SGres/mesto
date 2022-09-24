@@ -1,7 +1,6 @@
 .card__block {
   display: flex;
   justify-content: space-between;
-  margin: 0px auto 0px;
-  width: 246px;
-  align-items: baseline;
+  margin: 22px auto 0px;
+  width: 241px;
 }
