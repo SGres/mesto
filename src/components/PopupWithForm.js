@@ -11,6 +11,7 @@ export class PopupWithForm extends Popup {
     this._inputList = this._popupElement.querySelectorAll('.popup__input');
     this.toggleButtonCaption = this.toggleButtonCaption.bind(this);
     this.closePopup = this.closePopup.bind(this);
+    this.setEventListeners = this.setEventListeners.bind(this);
   }
 
   toggleButtonCaption(isSave) {
@@ -46,5 +47,5 @@ export class PopupWithForm extends Popup {
     this._inputList.forEach((input) => {
       input.value = data[input.name];
     });
-    }
+  }
 }
