@@ -1,7 +1,7 @@
 export class UserInfo {
   constructor({ profileName, profileAbout, avatarElement }) {
-    this._profileName = profileName;
-    this._profileAbout = profileAbout;
+    this._profileName = document.querySelector(profileName);
+    this._profileAbout = document.querySelector(profileAbout);
     this._avatarElement = avatarElement;
     this.getUserInfo = this.getUserInfo.bind(this);
     this.setUserInfo = this.setUserInfo.bind(this);
@@ -9,8 +9,8 @@ export class UserInfo {
 
   getUserInfo() {
     return {
-      name: this._profileName.textContent,
-      about: this._profileAbout.textContent,
+      inputAbout: this._profileAbout.textContent,
+      inputName: this._profileName.textContent,
     }
   }
 

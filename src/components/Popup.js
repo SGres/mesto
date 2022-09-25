@@ -1,11 +1,11 @@
 export class Popup {
   constructor(popupSelector) {
-    this._popupSelector = popupSelector;
+    this._popupElement = document.querySelector(popupSelector);
   }
 
   //закрытие попапа на крестик или клик по оверлею
   setEventListeners() {
-    this._popupSelector.addEventListener('mousedown', (evt) => {
+    this._popupElement.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains('popup_active') ||
         evt.target.classList.contains('popup__button-close')) {
         this.closePopup();
@@ -21,13 +21,12 @@ export class Popup {
   };
 
   openPopup() {
-    this._popupSelector.classList.add('popup_active');
-    this.setEventListeners();
+    this._popupElement.classList.add('popup_active');
     document.addEventListener('keyup', this._handleEscClose);
   }
 
   closePopup() {
-    this._popupSelector.classList.remove('popup_active');
+    this._popupElement.classList.remove('popup_active');
     document.removeEventListener('keyup', this._handleEscClose);
   }
 }

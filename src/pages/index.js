@@ -11,17 +11,13 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
 //Импорт констант
-import {
-  buttonNewCard, profileEditButton, popupEditProfile, popupNewFoto, popupOpenFoto, profileAbout, profileName,
-  templateCard, avatarElement, popupDeletionCard, popupUpdateAvatar, сontainerForCards, buttonCaptions,
-  confirmDeleteButtonCaptions, config, inputNameProfile, inputAboutProfile
-} from '../utils/helpers.js';
+import { buttonNewCard, profileEditButton, avatarElement, buttonCaptions, confirmDeleteButtonCaptions, config, inputNameProfile, inputAboutProfile} from '../utils/helpers.js';
 
 
 // Экземпляры классов
 const userInfo = new UserInfo({
-  profileName: profileName,
-  profileAbout: profileAbout,
+  profileName: '.profile__name',
+  profileAbout: '.profile__job',
   avatarElement: avatarElement
 });
 
@@ -33,7 +29,8 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-50');
 
 const editUserInfoHandler = (data, toggleButtonCaptionCallback, closePopupCallback) => {
   toggleButtonCaptionCallback(true);
-  api.editUserInfo(data.inputName, data.inputJob)
+  console.dir(data);
+  api.editUserInfo(data.inputName, data.inputAbout)
     .then((res) => {
       userInfo.setUserInfo(res);
       closePopupCallback();
@@ -46,16 +43,13 @@ const editUserInfoHandler = (data, toggleButtonCaptionCallback, closePopupCallba
     })
 };
 
-const profileEditForm = new FormValidator(config, popupEditProfile);
-
+const profileEditForm = new FormValidator(config, '.popup_specific_edit-profile');
 profileEditForm.enableValidation();
 
-const popupEditProfileopen = new PopupWithForm(popupEditProfile, editUserInfoHandler, buttonCaptions);
-
+const popupEditProfileopen = new PopupWithForm('.popup_specific_edit-profile', editUserInfoHandler, buttonCaptions);
+popupEditProfileopen.setEventListeners();
 profileEditButton.addEventListener('click', () => {
-  const currentProfileData = userInfo.getUserInfo();
-  inputNameProfile.value = currentProfileData.name;
-  inputAboutProfile.value = currentProfileData.about;
+  popupEditProfileopen.setInputValues(userInfo.getUserInfo());
   popupEditProfileopen.openPopup();
   profileEditForm.resetValidation();
 });
@@ -63,8 +57,8 @@ profileEditButton.addEventListener('click', () => {
 
 // Работа с попапом карточки
 
-const popupWithImage = new PopupWithImage(popupOpenFoto);
-
+const popupWithImage = new PopupWithImage('.popup_specific_open-card');
+popupWithImage.setEventListeners();
 const handlerCardClick = (name, link) => {
   popupWithImage.openPopup(name, link);
 };
@@ -92,8 +86,7 @@ const deleteCardHendler = (cardId, removeCardCallback, toggleButtonCaption, clos
     })
 };
 
-const deletionCardForm = new PopupWithDeletion(popupDeletionCard, deleteCardHendler, confirmDeleteButtonCaptions);
-
+const deletionCardForm = new PopupWithDeletion('.popup_speficic_deletions', deleteCardHendler, confirmDeleteButtonCaptions);
 deletionCardForm.setEventListeners();
 
 const handleCardLike = (cardId, isLiked, setLikesCallback) => {
@@ -105,7 +98,7 @@ const handleCardLike = (cardId, isLiked, setLikesCallback) => {
 }
 
 const createCard = (item) => {
-  const card = new Card(item, userInfo.getUserId(), templateCard,
+  const card = new Card(item, userInfo.getUserId(), '.tl-card',
     {
       openViewHandler: handlerCardClick,
       deleteCardHendler: handleDeleteConfirm,
@@ -115,13 +108,14 @@ const createCard = (item) => {
   return cardElement;
 };
 
-const cardList = new Section({ renderer: createCard }, сontainerForCards);
+const cardList = new Section({ renderer: createCard }, '.cards');
 
 
 // Работа с аватаром
 const updateAvatarHandler = (data, toggleButtonCaptionCallback, closePopupCallback) => {
   toggleButtonCaptionCallback(true);
-  api.updateAvatar(data.link)
+  console.log(data);
+    api.updateAvatar(data.link)
     .then((profile) => {
       userInfo.setUserInfo(profile)
       closePopupCallback();
@@ -134,10 +128,10 @@ const updateAvatarHandler = (data, toggleButtonCaptionCallback, closePopupCallba
     })
 };
 
-const avatarEditForm = new FormValidator(config, popupUpdateAvatar);
+const avatarEditForm = new FormValidator(config, '.popup_specific_edit-avatar');
 avatarEditForm.enableValidation();
 
-const avatarUpdatePopup = new PopupWithForm(popupUpdateAvatar, updateAvatarHandler, buttonCaptions);
+const avatarUpdatePopup = new PopupWithForm('.popup_specific_edit-avatar', updateAvatarHandler, buttonCaptions);
 avatarUpdatePopup.setEventListeners();
 
 avatarElement.addEventListener('click', () => {
@@ -147,7 +141,7 @@ avatarElement.addEventListener('click', () => {
 
 
 //Работа с попапом добавлением карточки
-const addCardForm = new FormValidator(config, popupNewFoto);
+const addCardForm = new FormValidator(config, '.popup_specific_new-card');
 addCardForm.enableValidation();
 
 const addCardHandler = (item, toggleButtonCaptionCallback, closePopupCallback) => {
@@ -165,7 +159,8 @@ const addCardHandler = (item, toggleButtonCaptionCallback, closePopupCallback) =
     })
 }
 
-const popupAddCard = new PopupWithForm(popupNewFoto, addCardHandler, buttonCaptions);
+const popupAddCard = new PopupWithForm('.popup_specific_new-card', addCardHandler, buttonCaptions);
+popupAddCard.setEventListeners();
 buttonNewCard.addEventListener('click', () => {
   addCardForm.resetValidation();
   popupAddCard.openPopup();

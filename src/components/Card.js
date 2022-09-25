@@ -9,7 +9,7 @@ export class Card {
     this._id = _id;
     this._userId = userId;
     this._isOwner = userId === ownerId;
-    this._cardSelector = cardSelector;
+    this._cardElement = document.querySelector(cardSelector);
     this._handleOpenView = openViewHandler;
     this._handleDeleteCard = deleteCardHendler;
     this._hendlerCardLike = cardLikeHendler;
@@ -24,7 +24,7 @@ export class Card {
 
 
   _getTemplate() {
-    const cardElement = this._cardSelector.content.cloneNode(true).children[0]
+    const cardElement = this._cardElement.content.cloneNode(true).children[0]
     return cardElement;
   }
 

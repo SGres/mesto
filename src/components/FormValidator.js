@@ -1,13 +1,13 @@
 export class FormValidator {
   constructor(config, formSelector) {
-    this._form = formSelector
-    this._inputSelector = config.inputSelector
-    this._submitButtonSelector = config.submitButtonSelector
+    this._form = document.querySelector(formSelector);
+    this._inputElement = config.inputSelector
+    this._submitButtonElement = config.submitButtonSelector
     this._inactiveButtonClass = config.inactiveButtonClass
     this._inputErrorClass = config.inputErrorClass
     this._errorClass = config.errorClass
-    this._inputList = Array.from(this._form.querySelectorAll(`.${this._inputSelector}`));
-    this._saveButton = this._form.querySelector(`.${this._submitButtonSelector}`);
+    this._inputList = Array.from(this._form.querySelectorAll(`.${this._inputElement}`));
+    this._saveButton = this._form.querySelector(`.${this._submitButtonElement}`);
   }
 
   // Функция, которая добавляет класс с ошибкой

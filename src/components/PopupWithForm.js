@@ -6,9 +6,9 @@ export class PopupWithForm extends Popup {
     this._normalCaption = normalCaption;
     this._activeCaption = activeCaption;
     this._handleFormSubmit = handleFormSubmit;
-    this._submitButton = this._popupSelector.querySelector('.popup__button-form');
-    this._popupForm = this._popupSelector.querySelector('.popup__form');
-    this._inputList = this._popupSelector.querySelectorAll('.popup__input');
+    this._submitButton = this._popupElement.querySelector('.popup__button-form');
+    this._popupForm = this._popupElement.querySelector('.popup__form');
+    this._inputList = this._popupElement.querySelectorAll('.popup__input');
     this.toggleButtonCaption = this.toggleButtonCaption.bind(this);
     this.closePopup = this.closePopup.bind(this);
   }
@@ -27,13 +27,17 @@ export class PopupWithForm extends Popup {
   }
 
   handleSubmitClick = (evt) => {
+
     evt.preventDefault();
     this._handleFormSubmit(this._getInputValues(), this.toggleButtonCaption, this.closePopup);
+    console.dir(this._getInputValues());
   }
 
   setEventListeners() {
+    console.dir(this._popupForm);
     super.setEventListeners();
     this._popupForm.addEventListener('submit', this.handleSubmitClick);
+
   }
 
   closePopup() {
@@ -41,4 +45,10 @@ export class PopupWithForm extends Popup {
     super.closePopup();
     this._popupForm.removeEventListener('submit', this.handleSubmitClick);
   }
+
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
+    }
 }

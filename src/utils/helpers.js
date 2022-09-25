@@ -3,15 +3,7 @@ export const inputNameProfile = popupEditProfile.querySelector('.popup__input_ty
 export const inputAboutProfile = popupEditProfile.querySelector('.popup__input_type_job')
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const buttonNewCard = document.querySelector('.profile__add-button');
-export const templateCard = document.querySelector('.tl-card');
-export const popupNewFoto = document.querySelector('.popup_specific_new-card');
-export const popupOpenFoto = document.querySelector('.popup_specific_open-card');
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector('.profile__job');
 export const avatarElement = document.querySelector('.profile__avatar');
-export const popupDeletionCard = document.querySelector('.popup_speficic_deletions');
-export const popupUpdateAvatar = document.querySelector('.popup_specific_edit-avatar');
-export const сontainerForCards = document.querySelector('.cards');
 
 //данные
 export const config = {

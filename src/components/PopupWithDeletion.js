@@ -6,8 +6,8 @@ export class PopupWithDeletion extends Popup {
     this._handleSubmit = submitHandler
     this._normalCaption = normalCaption;
     this._activeCaption = activeCaption;
-    this._submitButton = this._popupSelector.querySelector('.popup__button-form');
-    this._popupForm = this._popupSelector.querySelector('.popup__form');
+    this._submitButton = this._popupElement.querySelector('.popup__button-form');
+    this._popupForm = this._popupElement.querySelector('.popup__form');
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this.toggleButtonCaption = this.toggleButtonCaption.bind(this);
     this.closePopup = this.closePopup.bind(this);
