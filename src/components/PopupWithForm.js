@@ -27,17 +27,13 @@ export class PopupWithForm extends Popup {
   }
 
   handleSubmitClick = (evt) => {
-
     evt.preventDefault();
     this._handleFormSubmit(this._getInputValues(), this.toggleButtonCaption, this.closePopup);
-    console.dir(this._getInputValues());
   }
 
   setEventListeners() {
-    console.dir(this._popupForm);
     super.setEventListeners();
     this._popupForm.addEventListener('submit', this.handleSubmitClick);
-
   }
 
   closePopup() {

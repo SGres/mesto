@@ -11,7 +11,7 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
 //Импорт констант
-import { buttonNewCard, profileEditButton, avatarElement, buttonCaptions, confirmDeleteButtonCaptions, config, inputNameProfile, inputAboutProfile} from '../utils/helpers.js';
+import { buttonNewCard, profileEditButton, avatarElement, buttonCaptions, confirmDeleteButtonCaptions, config } from '../utils/helpers.js';
 
 
 // Экземпляры классов
@@ -29,7 +29,6 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-50');
 
 const editUserInfoHandler = (data, toggleButtonCaptionCallback, closePopupCallback) => {
   toggleButtonCaptionCallback(true);
-  console.dir(data);
   api.editUserInfo(data.inputName, data.inputAbout)
     .then((res) => {
       userInfo.setUserInfo(res);
@@ -46,11 +45,11 @@ const editUserInfoHandler = (data, toggleButtonCaptionCallback, closePopupCallba
 const profileEditForm = new FormValidator(config, '.popup_specific_edit-profile');
 profileEditForm.enableValidation();
 
-const popupEditProfileopen = new PopupWithForm('.popup_specific_edit-profile', editUserInfoHandler, buttonCaptions);
-popupEditProfileopen.setEventListeners();
+const popupEditProfileOpen = new PopupWithForm('.popup_specific_edit-profile', editUserInfoHandler, buttonCaptions);
+popupEditProfileOpen.setEventListeners();
 profileEditButton.addEventListener('click', () => {
-  popupEditProfileopen.setInputValues(userInfo.getUserInfo());
-  popupEditProfileopen.openPopup();
+  popupEditProfileOpen.setInputValues(userInfo.getUserInfo());
+  popupEditProfileOpen.openPopup();
   profileEditForm.resetValidation();
 });
 
@@ -71,7 +70,6 @@ const handleDeleteConfirm = (cardId, removeCardCallback) => {
 };
 
 const deleteCardHendler = (cardId, removeCardCallback, toggleButtonCaption, closePopupCallback) => {
-  console.log(closePopupCallback);
   toggleButtonCaption(true)
   api.deleteCard(cardId)
     .then(() => {
@@ -114,8 +112,7 @@ const cardList = new Section({ renderer: createCard }, '.cards');
 // Работа с аватаром
 const updateAvatarHandler = (data, toggleButtonCaptionCallback, closePopupCallback) => {
   toggleButtonCaptionCallback(true);
-  console.log(data);
-    api.updateAvatar(data.link)
+  api.updateAvatar(data.link)
     .then((profile) => {
       userInfo.setUserInfo(profile)
       closePopupCallback();
@@ -171,7 +168,6 @@ Promise.all([api.getUser(), api.getCards()])
   .then(([user, cards]) => {
     userInfo.setUserInfo(user);
     cardList.renderItems(cards);
-    console.log(user);
   })
   .catch((err) => {
     console.log(`Ошибка Promise.all: ${err}`);
