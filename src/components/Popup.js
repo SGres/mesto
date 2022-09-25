@@ -28,9 +28,13 @@ export class Popup {
     this.setEventListeners();
   }
 
-  closePopup() {
-    this._popupElement.classList.remove('popup_active');
+  _removeEventListeners() {
     this._popupElement.removeEventListener('mousedown', this._handleCloseClick);
     document.removeEventListener('keyup', this._handleEscClose);
+  }
+
+  closePopup() {
+    this._popupElement.classList.remove('popup_active');
+    this._removeEventListeners();
   }
 }

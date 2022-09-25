@@ -30,6 +30,11 @@ export class PopupWithDeletion extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupForm.addEventListener('submit',this._handleFormSubmit)
+    this._popupForm.addEventListener('submit',this._handleFormSubmit);
+  }
+
+  closePopup() {
+    this._popupForm.removeEventListener('submit',this._handleFormSubmit);
+    super.closePopup();
   }
 }
